@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Keyboard Soccer Game</title>
+  <style>
+    body {
+      margin: 0;
+      background: #57a773;
+      font-family: sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    h1 {
+      color: white;
+    }
+    #game {
+      position: relative;
+      width: 600px;
+      height: 400px;
+      background: #228B22;
+      border: 5px solid white;
+      margin-top: 20px;
+      overflow: hidden;
+    }
+    .goal {
+      position: absolute;
+      top: 0;
+      left: 200px;
+      width: 200px;
+      height: 50px;
+      background: white;
+      text-align: center;
+      font-weight: bold;
+      line-height: 50px;
+    }
+    .goalie {
+      position: absolute;
+      top: 60px;
+      left: 275px;
+      width: 50px;
+      height: 50px;
+      background: #FFD700;
+      border-radius: 50%;
+      transition: left 0.1s;
+    }
+    .ball {
+      position: absolute;
+      top: 380px;
+      left: 290px;
+      width: 20px;
+      height: 20px;
+      background: white;
+      border-radius: 50%;
+    }
+    #scoreboard {
+      margin-top: 20px;
+      font-size: 20px;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Keyboard Soccer Game ⚽</h1>
+  <div id="game">
+    <div class="goal">GOAL</div>
+    <div class="goalie" id="goalie"></div>
+    <div class="ball" id="ball"></div>
+  </div>
+  <div id="scoreboard">Score: 0 | Saves: 0</div>
+
+  <script>
+    const ball = document.getElementById("ball");
+    const goalie = document.getElementById("goalie");
+    const scoreboard = document.getElementById("scoreboard");
+    let score = 0;
+    let saves = 0;
+    let goalieX = 275;
+
+    function randomX(min, max) {
+      return Math.floor(Math.random() * (max - min)) + min;
+    }
+
+    function resetBall() {
+      ball.style.top = "380px";
+      ball.style.left = "290px";
+    }
+
+    function shootBall() {
+      let goalX = randomX(200, 400);
+      let ballY = 380;
+      let ballX = parseInt(ball.style.left);
+
+      const interval = setInterval(() => {
+        ballY -= 5;
+        ballX += (goalX - ballX) / 15;
+        ball.style.top = ballY + "px";
+        ball.style.left = ballX + "px";
+
+        const goalieLeft = parseInt(getComputedStyle(goalie).left);
+
+        if (ballY < 100) {
+          clearInterval(interval);
+
+          // Check collision with goalie
+          if (Math.abs(goalieLeft + 25 - ballX) < 30) {
+            saves++;
+          } else {
+            score++;
+          }
+
+          updateScore();
+          setTimeout(() => {
+            resetBall();
+            shootBall();
+          }, 1000);
+        }
+      }, 30);
+    }
+
+    function updateScore() {
+      scoreboard.innerText = `Score: ${score} | Saves: ${saves}`;
+    }
+
+    function moveGoalie(direction) {
+      if (direction === 'left' && goalieX > 0) {
+        goalieX -= 20;
+      } else if (direction === 'right' && goalieX < 550) {
+        goalieX += 20;
+      }
+      goalie.style.left = goalieX + 'px';
+    }
+
+    // Keyboard controls
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowLeft") moveGoalie('left');
+      if (e.key === "ArrowRight") moveGoalie('right');
+    });
+
+    // Start game
+    resetBall();
+    shootBall();
+  </script>
+
+</body>
+</html>

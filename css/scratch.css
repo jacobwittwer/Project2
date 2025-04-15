@@ -1,0 +1,94 @@
+/* scratch.css */
+
+/* Set the overall background and font styling */
+body {
+    background-color: #e6f2ff; /* very light blue */
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    color: #333;
+}
+
+/* Style the main heading paragraph */
+p {
+    font-size: 2em;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Style navigation links */
+a {
+    display: inline-block;
+    margin: 10px 15px;
+    text-decoration: none;
+    color: #005f99;
+    font-weight: bold;
+}
+
+a:hover {
+    color: #003d66;
+}
+
+/* Style content sections */
+div {
+    margin-bottom: 20px;
+}
+
+/* Centered container for the list */
+.list-container {
+    max-width: 700px;
+    margin: 0 auto 30px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.05);
+}
+
+/* Optional: Style the heading inside the list section */
+.list-container h2 {
+    text-align: center;
+    margin-bottom: 15px;
+    font-size: 1.5em;
+    color: #004d80;
+}
+
+/* Style list inside the white container */
+ol {
+    padding-left: 20px;
+}
+
+ul {
+    margin-top: 10px;
+    padding-left: 20px;
+}
+
+/* Style images */
+img {
+    margin: 10px;
+    border-radius: 8px;
+    box-shadow: 0 0 8px rgba(0,0,0,0.1);
+}
+
+/* Style video iframe */
+iframe {
+    display: block;
+    margin: 0 auto;
+    border-radius: 10px;
+    box-shadow: 0 0 12px rgba(0,0,0,0.2);
+}
+
+/* Footer styling */
+footer {
+    text-align: center;
+    margin-top: 40px;
+    padding: 10px 0;
+    font-size: 0.9em;
+    background-color: #d9ecff;
+    border-top: 1px solid #c0deff;
+}
+
+/* Tableau chart container spacing */
+.tableauPlaceholder {
+    margin-top: 30px;
+}
